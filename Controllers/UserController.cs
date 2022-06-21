@@ -41,7 +41,7 @@ namespace Decathlon.Controllers
             var emailcontrol = db.User.FirstOrDefault(m => m.Email == user.Email);
             if (emailcontrol == null)
             {
-                var fromAddress = new MailAddress("iskuryazilim@gmail.com");
+                var fromAddress = new MailAddress("testmailhere@gmail.com");
                 var toAddress = new MailAddress(user.Email);
                 var subject = "Decathlon | Yeni Kayıt Bilgilendirme";
                 var code = "Decathlon-" + Guid.NewGuid().ToString().Substring(0, 5);
@@ -65,7 +65,7 @@ namespace Decathlon.Controllers
                         EnableSsl = true,
                         DeliveryMethod = SmtpDeliveryMethod.Network,
                         UseDefaultCredentials = false,
-                        Credentials = new NetworkCredential(fromAddress.Address, "iskur123."),
+                        Credentials = new NetworkCredential(fromAddress.Address, "testmailpasswordhere"),
                         Timeout = 30000
                     })
                     {
