@@ -1,0 +1,146 @@
+﻿@using Decathlon.Models;
+@model Contact
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    string image = string.IsNullOrEmpty(Model.Image) ? "default-contact.png" : Model.Image;
+
+}
+
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">Site Contact</h4>
+                            <p class="sub-header">
+                                Web Sitenin iletişim bilgileri Ayarları
+                            </p>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <img src="~/Content/images/contact/@image" width="100%" />
+                                </div>
+                                <div class="col-md-6">
+
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form method="post" action="~/Contact/" enctype="multipart/form-data">
+
+                                        <div class="mb-3">
+                                            <label for="Image" class="form-label">Image</label>
+                                            <input type="file" id="Image" name="Image" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Description" class="form-label">Description</label>
+                                            <textarea id="Description" name="Description" class="form-control" rows="4"> @Html.Raw(Model.Description)</textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="Address1" class="form-label">Address 1</label>
+                                                    <input type="text" id="Address1" name="Address1" class="form-control" value="@Model.Address1">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="Address2" class="form-label">Address 2</label>
+                                                    <input type="text" id="Address2" name="Address2" class="form-control" value="@Model.Address2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="Phone1" class="form-label">Phone 1</label>
+                                                    <input type="text" id="Phone1" name="Phone1" class="form-control" value="@Model.Phone1">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="Phone2" class="form-label">Phone 2</label>
+                                                    <input type="text" id="Phone2" name="Phone2" class="form-control" value="@Model.Phone2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="Email1" class="form-label">Email 1</label>
+                                                    <input type="text" id="Email1" name="Email1" class="form-control" value="@Model.Email1">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="Email2" class="form-label">Email2 2</label>
+                                                    <input type="text" id="Email2" name="Email2" class="form-control" value="@Model.Email2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label for="Facebook" class="form-label">Facebook</label>
+                                                    <input type="text" id="Facebook" name="Facebook" class="form-control" value="@Model.Facebook">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="Twitter" class="form-label">Twitter</label>
+                                                    <input type="text" id="Twitter" name="Twitter" class="form-control" value="@Model.Twitter">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="Instagram" class="form-label">Instagram</label>
+                                                    <input type="text" id="Instagram" name="Instagram" class="form-control" value="@Model.Instagram">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label for="Youtube" class="form-label">Youtube</label>
+                                                    <input type="text" id="Youtube" name="Youtube" class="form-control" value="@Model.Youtube">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="Linkedin" class="form-label">Linkedin</label>
+                                                    <input type="text" id="Linkedin" name="Linkedin" class="form-control" value="@Model.Linkedin">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="Pinterest" class="form-label">Pinterest</label>
+                                                    <input type="text" id="Pinterest" name="Pinterest" class="form-control" value="@Model.Pinterest">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="GoogleMaps" class="form-label">Google Maps</label>
+                                            <input type="text" id="GoogleMaps" name="GoogleMaps" class="form-control" value="@Model.GoogleMaps">
+                                        </div>
+                                        
+
+                                        <div class="form-check mb-2 form-check-success">
+                                            <input class="form-check-input" type="checkbox" value="true" id="Status" name="Status" checked="@Model.Status">
+                                            <label class="form-check-label" for="customckeck1">Status</label>
+                                        </div>
+                                        <input type="hidden" value="@Model.Id" name="Id" id="Id" />
+
+                                        <button class="btn btn-success" type="submit">Edit Contact</button>
+                                    </form>
+                                </div> <!-- end col -->
+
+                            </div>
+                            <!-- end row-->
+
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card -->
+                </div><!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,96 @@
+﻿@using Decathlon.Models;
+@model Seo
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    string ico = string.IsNullOrEmpty(Model.Ico) ? "default-ico.png" : Model.Ico;
+
+    string logo = string.IsNullOrEmpty(Model.Logo) ? "default-logo.png" : Model.Logo;
+
+}
+
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">@Model.Title - Site Seo</h4>
+                            <p class="sub-header">
+                                Web Sitenin Seo Ayarları
+                            </p>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <img src="~/Content/images/seo/@ico" width="100%" />
+                                </div>
+                                <div class="col-md-8">
+                                    <img src="~/Content/images/seo/@logo" width="100%" />
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form method="post" action="~/SiteSeo/" enctype="multipart/form-data">
+                                        <div class="mb-3">
+                                            <label for="Ico" class="form-label">Ico</label>
+                                            <input type="file" id="Ico" name="Ico" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Logo" class="form-label">Logo</label>
+                                            <input type="file" id="Logo" name="Logo" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Title" class="form-label">Title</label>
+                                            <input type="text" id="Title" name="Title" class="form-control" value="@Model.Title">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Description" class="form-label">Description</label>
+                                            <input type="text" id="Description" name="Description" class="form-control" value="@Model.Description">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Keywords" class="form-label">Keywords</label>
+                                            <input type="text" id="Keywords" name="Keywords" class="form-control" value="@Model.Keywords">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="GoogleAnalityc" class="form-label">Google Analityc</label>
+                                            <input type="text" id="GoogleAnalityc" name="GoogleAnalityc" class="form-control" value="@Model.GoogleAnalityc">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="YandexMetrica" class="form-label">Yandex Metrica</label>
+                                            <input type="text" id="YandexMetrica" name="YandexMetrica" class="form-control" value="@Model.YandexMetrica">
+                                        </div>
+
+
+
+                                        <div class="form-check mb-2 form-check-success">
+                                            <input class="form-check-input" type="checkbox" value="true" id="Status" name="Status" checked="@Model.Status">
+                                            <label class="form-check-label" for="customckeck1">Status</label>
+                                        </div>
+                                        <input type="hidden" value="@Model.Id" name="Id" id="Id" />
+
+                                        <button class="btn btn-success" type="submit">Edit Seo</button>
+                                    </form>
+                                </div> <!-- end col -->
+
+                            </div>
+                            <!-- end row-->
+
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card -->
+                </div><!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

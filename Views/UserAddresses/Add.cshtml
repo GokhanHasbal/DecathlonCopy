@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">Add My Address</h4>
+                            <p class="sub-header">
+                                Adres Ekle
+                            </p>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <form method="post" action="~/UserAddresses/Add">
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Title</label>
+                                            <input type="text" class="form-control" name="Title" id="Title" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Country" class="form-label">Country</label>
+                                            <input type="text" id="Country" name="Country" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="County" class="form-label">County</label>
+                                            <input type="text" id="County" name="County" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="District" class="form-label">District</label>
+                                            <input type="text" id="District" name="District" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Street" class="form-label">Street</label>
+                                            <input type="text" id="Street" name="Street" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="PostCode" class="form-label">Post Code</label>
+                                            <input type="text" id="PostCode" name="PostCode" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="BuildingNo" class="form-label">Building No</label>
+                                            <input type="number" id="BuildingNo" name="BuildingNo" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="ApartmentNo" class="form-label">Apartment No</label>
+                                            <input type="number" id="ApartmentNo" name="ApartmentNo" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="OpenAddress" class="form-label">Open Address</label>
+                                            <textarea id="OpenAddress" name="OpenAddress" rows="3" class="form-control" required></textarea>
+                                        </div>
+
+                                        <button class="btn btn-success" type="submit">Add My Address</button>
+                                    </form>
+                                </div> <!-- end col -->
+                                <div class="col-md-6 text-center">
+                                    <h3>Adreslerim Bölümüne Yeni Adres Ekleme</h3>
+                                    <p>Bilgileri Eksiksiz Bir Şekilde Dodurunuz ve Boş Alan Bırakmayınız.</p>
+                                    <h2>@ViewBag.mesaj</h2>
+                                </div>
+                            </div>
+                            <!-- end row-->
+
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card -->
+                </div><!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+</div>
+
+
+

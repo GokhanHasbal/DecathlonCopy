@@ -1,0 +1,88 @@
+﻿@using Decathlon.AdminModel;
+@model AddressModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int i = 0;
+}
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="row">
+
+                                <div class="col-12 mb-3">
+                                    <h4 class="mt-0 header-title">@{int id = Convert.ToInt32(User.Identity.Name); var user=Model.User.FirstOrDefault(x => x.Id == id);}@user.Name My Address List</h4>
+                                    <p class="text-muted font-14 mb-3 float-start">
+                                        Sitede bulunan kullanıcıların adres listesi
+                                    </p>
+                                    <a class="btn btn-success float-end" href="~/UserAddresses/Add"><i class="fa fa-plus"></i> My Address Add</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Address Title</th>
+                                                <th>Country</th>
+                                                <th>County</th>
+                                                <th>Email</th>
+                                                <th>Selection</th>
+                                                <th>Status</th>
+                                                <th>Setting</th>
+                                            </tr>
+                                        </thead>
+
+
+                                        <tbody>
+                                            @foreach (var address in Model.Address)
+                                            {
+                                                i++;
+
+                                            <tr>
+                                                <td>@i</td>
+                                                <td>@address.Title</td>
+                                                <td>@address.Country</td>
+                                                <td>@address.County</td>
+                                                <td>@address.User.Email</td>
+                                                @{ var select = address.Selection == true ? "btn-success" : "btn-danger"; 
+                                                    var status = address.Status == true ? "btn-success" : "btn-danger"; }
+                                                <td><a class="btn  @select">@address.Selection</a></td>
+                                                <td><a class="btn  @status">@address.Status</a></td>
+                                                
+                                                <td>
+                                                    <a href="~/UserAddresses/Edit?id=@address.Id" class="btn btn-success"><i class="fa fa-map-marked-alt"></i></a>
+                                                    <a href="~/UserAddresses/Select?id=@address.Id" class="btn btn-primary"><i class="fa fa-map-marker-alt"> Select</i></a>
+                                                    <a href="~/UserAddresses/Delete?id=@address.Id" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                            }
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

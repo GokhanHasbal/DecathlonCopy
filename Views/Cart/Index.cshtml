@@ -1,0 +1,116 @@
+﻿@using Decathlon.Models;
+@model Cart
+@{
+    ViewBag.Title = "Index";
+}
+
+<section id="page-title">
+    <div class="container">
+        <h1>Cart</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="~/">Home</a></li>
+            <li class="breadcrumb-item"><a href="~/Shop">Shop</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Cart</li>
+        </ol>
+    </div>
+</section>
+
+<section id="content">
+    <div class="content-wrap">
+        <div class="container">
+            @if (Model.CartRows.Count() == 0)
+            {
+                <div class="alert alert-danger" role="alert">
+                    <i class="icon-info-circle"></i> Sepetinizde Ürün Bulunmamaktadır.
+                </div>
+            }
+            else
+            {
+                <table class="table cart mb-5">
+                    <thead>
+                        <tr>
+                            <th class="cart-product-remove">&nbsp;</th>
+                            <th class="cart-product-thumbnail">&nbsp;</th>
+                            <th class="cart-product-name">Product</th>
+                            <th class="cart-product-price">Unit Price</th>
+                            <th class="cart-product-quantity">Quantity</th>
+                            <th class="cart-product-subtotal">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CartRows)
+                        {
+                            string resim = string.IsNullOrEmpty(item.Product.Image) ? "default-product.png" : item.Product.Image;
+
+                            <tr class="cart_item">
+                                <td class="cart-product-remove">
+                                    <form method="post" action="~/Cart/DeleteFromCart">
+                                        <input type="hidden" id="id" name="id" value="@item.Product.Id" />
+                                        <button type="submit" class="remove btn btn-danger" title="Remove this item"><i class="icon-trash2 text-white"></i></button>
+                                    </form>
+
+                                </td>
+                                <td class="cart-product-thumbnail">
+                                    <a href="#"><img width="64" height="64" src="~/Content/images/product/@resim" alt=""></a>
+                                </td>
+                                <td class="cart-product-name">
+                                    <a href="#">@item.Product.Name</a>
+                                </td>
+                                <td class="cart-product-price">
+                                    <span class="amount">@((item.Product.Price-((item.Product.Price/100)*item.Product.Discount)).ToString("c"))</span>
+                                </td>
+                                <td class="cart-product-quantity">
+                                    <div class="quantity">
+                                        <input type="button" value="-" class="minus">
+                                        <input type="text" name="quantity" value="@item.Quantity" class="qty" />
+                                        <input type="button" value="+" class="plus">
+                                    </div>
+                                </td>
+                                <td class="cart-product-subtotal">
+                                    <span class="amount">@(((item.Product.Price-((item.Product.Price/100)*item.Product.Discount))*item.Quantity).ToString("c"))</span>
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="5">
+                                Total Price
+                            </td>
+                            <th>
+                                @Model.Total().ToString("c")
+                            </th>
+                        </tr>
+                        <tr class="cart_item">
+                            <td colspan="6">
+                                <div class="row justify-content-between py-2 col-mb-30">
+                                    <div class="col-lg-auto ps-lg-0">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <input type="text" value="" class="sm-form-control text-center text-md-start" placeholder="Enter Coupon Code.." />
+                                            </div>
+                                            <div class="col-md-4 mt-3 mt-md-0">
+                                                <a href="#" class="button button-3d button-black m-0">Apply Coupon</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-auto pe-lg-0">
+                                        <form method="post" action="~/Cart/ClearCart">
+                                            <button type="submit" class="button button-3d  button-red m-0">Clear Cart</button>
+                                            <a href="~/Home/Shop" class="button button-3d m-0">keep shopping</a>
+                                            <a href="~/Cart/Checkout" class="button button-3d mt-2 mt-sm-0 me-0">Checkout</a>
+                                        </form>
+
+
+
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            }
+
+        </div>
+    </div>
+</section>
+

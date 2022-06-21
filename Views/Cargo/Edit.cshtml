@@ -1,0 +1,90 @@
+﻿@using Decathlon.Models;
+@model Cargo
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    string resim = string.IsNullOrEmpty(Model.Image) ? "default-cargo-image.png" : Model.Image;
+
+    string logo = string.IsNullOrEmpty(Model.Logo) ? "default-cargo-logo.png" : Model.Logo;
+
+}
+
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">@Model.Name - Cargo Edit</h4>
+                            <p class="sub-header">
+                                Ürün Düzenleme
+                            </p>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <img src="~/Content/images/cargo/@logo" width="100%" />
+                                </div>
+                                <div class="col-md-8">
+                                    <img src="~/Content/images/cargo/@resim" width="100%" />
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form method="post" action="~/Cargo/Edit" enctype="multipart/form-data">
+                                        <div class="mb-3">
+                                            <label for="Image" class="form-label">Image</label>
+                                            <input type="file" id="Image" name="Image" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Logo" class="form-label">Logo</label>
+                                            <input type="file" id="Logo" name="Logo" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Name" class="form-label">Name</label>
+                                            <input type="text" id="Name" name="Name" class="form-control" required value="@Model.Name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Description" class="form-label">Description</label>
+                                            <textarea id="Description" name="Description" class="form-control" required>
+                                              @Model.Description                  
+                                            </textarea>
+                                            
+                                        </div>
+
+                                        
+
+                                        <div class="form-check mb-2 form-check-success">
+                                            <input class="form-check-input" type="checkbox" value="true" id="Status" name="Status" checked="@Model.Status">
+                                            <label class="form-check-label" for="customckeck1">Status</label>
+                                        </div>
+                                        <input type="hidden" value="@Model.Id" name="Id" id="Id" />
+
+                                        <button class="btn btn-success" type="submit">Edit Cargo</button>
+                                    </form>
+                                </div> <!-- end col -->
+
+                            </div>
+                            <!-- end row-->
+
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card -->
+                </div><!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#Description').summernote({ height: 300 });
+    });
+</script>
+
+
+
+

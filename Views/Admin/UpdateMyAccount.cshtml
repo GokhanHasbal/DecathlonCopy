@@ -1,0 +1,88 @@
+﻿
+@using Decathlon.Models;
+@model User
+@{
+    ViewBag.Title = "UpdateMyAccount";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">Reset Password</h4>
+                            <p class="sub-header">
+                                Şifrenizi değiştirin
+                            </p>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <form method="post">
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Registration Date</label>
+                                            <input type="text" class="form-control" value="@Model.RegistrationDate" disabled>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input type="text" class="form-control" value="@Model.Email" disabled>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Permisson</label>
+                                            <input type="text" class="form-control" value="@ViewBag.yetki" disabled>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Grade</label>
+                                            <input type="text" class="form-control" value="@ViewBag.grade" disabled>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Grade Score</label>
+                                            <input type="text" class="form-control" value="@Model.GradeScore" disabled>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="Name" class="form-label">Name</label>
+                                            <input type="text" id="Name" name="Name" class="form-control" value="@Model.Name" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Surname" class="form-label">Surname</label>
+                                            <input type="text" id="Surname" name="Surname" class="form-control" value="@Model.Surname" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="TcNo" class="form-label">Tc No</label>
+                                            <input type="text" id="TcNo" name="TcNo" class="form-control" value="@Model.TcNo" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="Phone" class="form-label">Phone</label>
+                                            <input type="text" id="Phone" name="Phone" class="form-control" value="@Model.Phone" required>
+                                        </div>
+
+                                        <button class="btn btn-success" type="submit">Update My Account</button>
+                                    </form>
+                                </div> <!-- end col -->
+                                <div class="col-md-6 text-center">
+                                    <h3>Bilgilerinizi Güncelleyiniz</h3>
+                                    <p>Bilgilerinizi Eksiksiz Bir Şekilde Dodurunuz ve Boş Alan Bırakmayınız.</p>
+                                    <h2>@ViewBag.mesaj</h2>
+                                </div>
+                            </div>
+                            <!-- end row-->
+
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card -->
+                </div><!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+</div>
+
+

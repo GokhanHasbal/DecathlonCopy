@@ -1,0 +1,84 @@
+﻿@using Decathlon.Models;
+@model List<Page>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int i = 0;
+}
+
+
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="row">
+
+                                <div class="col-12 mb-3">
+                                    <h4 class="mt-0 header-title">Site Page List</h4>
+                                    <p class="text-muted font-14 mb-3 float-start">
+                                        Sitede bulunan sayfaların listesi
+                                    </p>
+                                    <a class="btn btn-success float-end" href="~/SitePage/Add"><i class="fa fa-plus"></i> Page Add</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Page Title</th>
+                                                <th>Status</th>
+                                                <th>Setting</th>
+                                            </tr>
+                                        </thead>
+
+
+                                        <tbody>
+                                            @foreach (var page in Model)
+                                            {
+                                                i++;
+
+                                                <tr>
+                                                    <td>@i</td>
+                                                    
+                                                    <td>@page.Title</td>
+                                                   
+                                                    @{var status = page.Status == true ? "btn-success" : "btn-danger"; }
+                                                    <td><a class="btn  @status">@page.Status</a></td>
+
+                                                    <td>
+                                                        <a href="~/SitePage/Edit?id=@page.Id" class="btn btn-success"><i class="mdi mdi-account-star"></i></a>
+                                                        <a href="~/SitePage/Delete?id=@page.Id" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

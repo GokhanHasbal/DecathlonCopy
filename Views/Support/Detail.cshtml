@@ -1,0 +1,105 @@
+﻿@using Decathlon.AdminModel;
+@model SupportModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title"><a href="~/Support/">Supports</a> - @Model.SingleSupport.User.Name @Model.SingleSupport.User.Surname</h4>
+
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="mb-3">
+                                        <table class="table">
+
+                                            <tr>
+                                                <th>Date</th>
+                                                <td>@Model.SingleSupport.Date</td>
+                                            </tr>
+                                            <tr>
+                                                <th>User Name</th>
+                                                <td>@Model.SingleSupport.User.Name @Model.SingleSupport.User.Surname</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Subject</th>
+                                                <td>@Model.SingleSupport.Subject</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Comment</th>
+                                                <td><textarea class="form-control" disabled>@Html.Raw(Model.SingleSupport.Description)</textarea></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(Model.SingleSupport.SupportStatus))
+            {
+
+           
+                                    <form method="post" action="~/Support/SupportStatus">
+                                        <div class="form-check mb-2 form-check-success">
+
+                                            <input class="form-check-input" type="checkbox" value="true" id="Status" name="Status" checked="@Model.SingleSupport.Status">
+                                            <label class="form-check-label" for="customckeck1">Support Status</label>
+                                            <select class="form-control" id="SupportStatus" name="SupportStatus">
+                                                @if (string.IsNullOrEmpty(Model.SingleSupport.SupportStatus))
+                                                {
+                                                    <option value="Request Pending">Request Pending</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@Model.SingleSupport.SupportStatus">@Model.SingleSupport.SupportStatus</option>
+
+                                                }
+                                            <optgroup>
+                                                <option value="Request Pending">Request Pending</option><!--Talep Beklemede-->
+                                                <option value="Request Received">Request Received</option><!--Talep Alındı-->
+                                                <option value="Request Processing">Request Processing</option><!--Talep İşlemde-->
+                                                <option value="Request Completed">Request Completed</option><!--Talep Tamamlandı-->
+                                                <option value="Request Canceled">Request Canceled</option><!--Talep İptal Edildi-->
+                                            </optgroup>
+                                            </select>
+                                        </div>
+                                        <input type="hidden" name="Id" id="Id" value="@Model.SingleSupport.Id" />
+                                        <button class="btn btn-success" type="submit"><i class="fa fa-check-double"></i> Change Request</button>
+
+                                    </form>
+                                    }
+                                    <form method="post" action="~/Support/Detail">
+                                        <div class="form-check mb-2 mt-3 form-check-success">
+
+                                            <input class="form-check-input" type="checkbox" value="true" id="Status" name="Status" checked="@Model.SingleSupport.Status">
+                                            <label class="form-check-label" for="customckeck1">Status</label>
+                                        </div>
+                                        <input type="hidden" name="SupportStatus" id="SupportStatus" value="Request Received" />
+                                        <input type="hidden" name="Id" id="Id" value="@Model.SingleSupport.Id" />
+                                        <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Support Accept</button>
+                                        <a href="~/Support/Delete?id=@Model.SingleSupport.Id" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
+
+                                    </form>
+                                </div> <!-- end col -->
+
+                            </div>
+                            <!-- end row-->
+
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card -->
+                </div><!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+</div>
+
+
+

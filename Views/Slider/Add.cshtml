@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">Add Sldier</h4>
+                            <p class="sub-header">
+                                Sldier Ekleme
+                            </p>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <form method="post" action="~/Slider/Add" enctype="multipart/form-data">
+
+                                        <div class="mb-3">
+                                            <label for="Title" class="form-label">Sldier Title</label>
+                                            <input type="text" id="Title" name="Title" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Description" class="form-label">Description</label>
+                                            <textarea class="form-control" id="Description" name="Description" rows="3"></textarea>
+
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Image" class="form-label">Slider Image</label>
+                                            <input type="file" id="Image" name="Image" class="form-control">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="Link" class="form-label">Slider Link</label>
+                                            <input type="text" id="Link" name="Link" class="form-control" required>
+                                        </div>
+                                        <div class="form-check mb-2 form-check-success">
+                                            <input class="form-check-input" type="checkbox" value="true" id="Status" name="Status" checked="">
+                                            <label class="form-check-label" for="customckeck1">Status</label>
+                                        </div>
+
+                                        <button class="btn btn-success" type="submit">Add New Sldier</button>
+                                    </form>
+                                </div> <!-- end col -->
+                                <div class="col-md-6 text-center">
+                                    <h3>Sisteme Yeni Slider Ekleme</h3>
+                                    <p>Bilgileri Eksiksiz Bir Şekilde Dodurunuz ve Boş Alan Bırakmayınız.</p>
+                                    <h2>@ViewBag.mesaj</h2>
+                                </div>
+                            </div>
+                            <!-- end row-->
+
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card -->
+                </div><!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+</div>
+
+
+

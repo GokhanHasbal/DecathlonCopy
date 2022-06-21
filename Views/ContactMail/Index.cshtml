@@ -1,0 +1,86 @@
+﻿@using Decathlon.Models;
+@model List<ContactMail>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int i = 0;
+}
+
+
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="row">
+
+                                <div class="col-12 mb-3">
+                                    <h4 class="mt-0 header-title">Concact List</h4>
+                                    <p class="text-muted font-14 mb-3 float-start">
+                                        Sitey gönderilen iletişim mail listesi
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Name Surname</th>
+                                                <th>Subject</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                                <th>Setting</th>
+                                            </tr>
+                                        </thead>
+
+
+                                        <tbody>
+                                            @foreach (var contact in Model)
+                                            {
+                                                i++;
+
+                                                <tr>
+                                                    <td>@i</td>
+
+                                                    <td>@contact.Name @contact.Surname</td>
+                                                    <td>@contact.Subject</td>
+                                                    <td>@contact.Date</td>
+                                                    @{var status = contact.Status == true ? "btn-success" : "btn-danger"; }
+                                                    <td><a class="btn  @status">@contact.Status</a></td>
+
+                                                    <td>
+                                                        <a href="~/ContactMail/Detail?id=@contact.Id" class="btn btn-success"><i class="mdi mdi-account-star"></i></a>
+                                                        <a href="~/ContactMail/Delete?id=@contact.Id" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

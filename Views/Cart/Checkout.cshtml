@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<section id="page-title">
+    <div class="container clearfix">
+        <h1>Checkout</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="~/">Home</a></li>
+            <li class="breadcrumb-item"><a href="~/Home/Shop">Shop</a></li>
+            <li class="breadcrumb-item"><a href="~/Cart">Cart</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+        </ol>
+    </div>
+</section>
+
+
+<section id="content">
+    <div class="content-wrap">
+        <div class="container clearfix">
+            <div class="row col-mb-50 gutter-50">
+                <div class="col-lg-6">
+                    <h3>Shipping Address</h3>
+                    <form id="shipping-form" name="shipping-form" class="mb-0" action="~/Cart/Checkout" method="post">
+                        <div class="col-md-6 form-group">
+                            <label for="shipping-form-name">Name Surname:</label>
+                            <p>Erhan Kaya</p>
+                        </div>
+
+                        <div class="w-100"></div>
+                        <div class="col-12 form-group">
+                            <label for="shipping-form-companyname">Address Header:</label>
+                            <input type="text" id="AddressHeader" name="AddressHeader" value="" class="sm-form-control" />
+                        </div>
+                        <div class="col-12 form-group">
+                            <label for="shipping-form-address">Address:</label>
+                            <input type="text" id="MyAddress" name="MyAddress" value="" class="sm-form-control" />
+                        </div>
+
+                        <div class="col-12 form-group">
+                            <label for="shipping-form-city">City / Town</label>
+                            <input type="text" id="City" name="City" value="" class="sm-form-control" />
+                        </div>
+                        <div class="col-12 form-group">
+                            <label for="shipping-form-message">Notes <small>*</small></label>
+<textarea class="sm-form-control" id="Notes" name="Notes" rows="6" cols="30"></textarea>
+                        </div>
+                        <input type="hidden" id="UserId" name="UserId" value="1" />
+                        <button type="submit" class="button button-3d float-end">Place Order</button>
+
+                    </form>
+                </div>
+                <div class="col-6">
+                    @ViewBag.Mesaj
+                </div>
+                <div class="w-100"></div>
+            </div>
+        </div>
+    </div>
+</section>

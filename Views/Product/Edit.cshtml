@@ -1,0 +1,239 @@
+﻿@using Decathlon.AdminModel;
+@model ProductModel
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    string resim = string.IsNullOrEmpty(Model.SingleProduct.Image) ? "default-product.png" : Model.SingleProduct.Image;
+}
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">@Model.SingleProduct.Name - Product Edit</h4>
+                            <p class="sub-header">
+                                Ürün Düzenleme
+                            </p>
+                            <div class="row mb-3">
+                                <div class="col-md-5">
+                                    <img src="~/Content/images/product/@resim" width="100%" />
+                                </div>
+                                <div class="col-md-7">
+                                    <style>
+                                        .image-setting{
+                                            position:absolute;
+                                        }
+                                    </style>
+                                    <div class="row">
+                                        @foreach (var image in Model.ProductImage)
+                                                {
+                                                    string icon = image.Status == true ? "fa-eye" : "fa-eye-slash";
+                                                    string btn = image.Status == true ? "btn-success" : "btn-warning";
+                                        <div class="col-md-4 mb-3">
+                                            <div class="image-setting">
+                                                
+                                                <a class="btn @btn btn-sm p-1" href="~/Product/ProductImageSatus?id=@image.Id">
+                                                    <i class="fa @icon"></i>
+                                                </a>
+                                                
+                                                <a class="btn btn-danger btn-sm p-1" href="~/Product/ProductImageDelete?id=@image.Id">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
+                                            </div>
+                                            <img src="~/Content/images/product/@image.Image" width="100%" />
+
+                                        </div>
+                                        }
+
+                                    </div>
+                                    <form method="post" action="~/Product/ProductImageAdd" enctype="multipart/form-data">
+                                        <div class="mb-3">
+                                            <label for="Image" class="form-label">Image</label>
+                                            <input type="file" id="Image" name="Image" class="form-control">
+                                            <input type="hidden" value="@Model.SingleProduct.Id" name="ProductId" id="ProductId" />
+                                        </div>
+                                        <div class="form-check mb-2 form-check-success">
+                                            <input class="form-check-input" type="checkbox" value="true" id="Status" name="Status" checked="">
+                                            <label class="form-check-label" for="customckeck1">Status</label>
+                                        </div>
+                                        <button class="btn btn-danger" type="submit"><i class="fa fa-images"></i> Add Image</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form method="post" action="~/Product/Edit" enctype="multipart/form-data">
+                                        <div class="mb-3">
+                                            <label for="Image" class="form-label">Image</label>
+                                            <input type="file" id="Image" name="Image" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Name" class="form-label">Name</label>
+                                            <input type="text" id="Name" name="Name" class="form-control" required value="@Model.SingleProduct.Name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Description" class="form-label">Description</label>
+                                            <textarea id="Description" name="Description" class="form-control" required>
+                                              @Model.SingleProduct.Description                  
+                                            </textarea>
+                                            <div style="height:500px;width:100%;background-color:white;color:black!important;">
+
+                                                @Html.Raw(Model.SingleProduct.Description)
+                                                <!--Html olarak gelen metni çıktı olarak alabilme-->
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="Stock" class="form-label">Stock</label>
+                                            <input type="number" min="0" id="Stock" name="Stock" class="form-control" value="@Model.SingleProduct.Stock" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Price" class="form-label">Price</label>
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    @{
+                                                        string fiyat = Model.SingleProduct.Price.ToString();
+                                                        string price = "";
+                                                        string subprice = "";
+                                                        if (fiyat.Contains(','))
+                                                        {
+                                                            string[] deger = fiyat.Split(',');
+                                                            price = deger[0];
+                                                            subprice = deger[1];
+                                                        }
+                                                        else
+                                                        {
+                                                            price = Model.SingleProduct.Price.ToString();
+                                                            subprice = "00";
+                                                        }
+                                                    }
+                                                    <input type="number" min="0" id="Price" name="Price" class="form-control" value="@price" required>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <input type="number" min="0" max="99" id="SubPrice" name="SubPrice" class="form-control" value="@subprice" required>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Discount" class="form-label">Discount</label>
+                                            <input type="number" min="0" max="100" id="Discount" step="0.1" name="Discount" class="form-control" value="@Model.SingleProduct.Discount" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Tax" class="form-label">Tax</label>
+                                            <input type="number" min="0" max="20" id="Tax" step="0.1" name="Tax" class="form-control" value="@Model.SingleProduct.Tax" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Rate" class="form-label">Rate</label>
+                                            <input type="number" min="0" max="5" id="Rate" name="Rate" class="form-control" value="@Model.SingleProduct.Rate" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Category</label>
+                                            <select class="form-control" name="CategoryId" id="CategoryId">
+                                                <option value="@Model.SingleProduct.CategoryId" class="text-primary">
+                                                    @Model.SingleProduct.Category.Name
+                                                </option>
+
+                                                @foreach (var category in Model.Category)
+                                                {
+                                                    <option value="@category.Id" class="text-danger">@category.Name</option>
+                                                    <optgroup>
+                                                        @foreach (var subcategory in Model.SubCategory.Where(x => x.MainCategoryId == category.Id))
+                                                        {
+                                                            <option value="@subcategory.Id" class="text-success">@subcategory.Name</option>
+                                                        }
+                                                    </optgroup>
+                                                }
+                                            </select>
+
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Brand</label>
+                                            <select class="form-control" name="BrandId" id="BrandId">
+                                                <option value="@Model.SingleProduct.BrandId" class="text-primary">
+                                                    @Model.SingleProduct.Brand.Name
+                                                </option>
+                                                <optgroup>
+                                                    @foreach (var item in Model.Brand)
+                                                    {
+                                                        <option value="@item.Id">@item.Name</option>
+                                                    }
+                                                </optgroup>
+
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Campaing</label>
+                                            <select class="form-control" name="CampaingId" id="CampaingId">
+                                                @if (Model.SingleProduct.CampaingId == 0)
+                                                {
+                                                    <option value="0">Non Compaign</option>
+                                                }
+                                                else
+                                                {
+                                                    var title = Model.Campaing.FirstOrDefault(x => x.Id == Model.SingleProduct.CampaingId);
+
+                                                    <option value="@title.Id">@title.Title</option>
+                                                }
+
+
+                                                @foreach (var item in Model.Campaing)
+                                                {
+                                                    <option value="@item.Id">@item.Title</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="SeoKeywords" class="form-label">Keywords</label>
+                                            <input type="text" id="SeoKeywords" name="SeoKeywords" value="@Model.SingleProduct.SeoKeywords" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="SeoDescription" class="form-label">Seo Description</label>
+                                            <input type="text" id="SeoDescription" name="SeoDescription" value="@Model.SingleProduct.SeoDescription" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="SeoTitle" class="form-label">Title</label>
+                                            <input type="text" id="SeoTitle" name="SeoTitle" class="form-control" value="@Model.SingleProduct.SeoTitle" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="SeoUrl" class="form-label">Seo Url</label>
+                                            <input type="text" id="SeoUrl" name="SeoUrl" class="form-control" value="@Model.SingleProduct.SeoUrl" required>
+                                        </div>
+
+
+                                        <div class="form-check mb-2 form-check-success">
+                                            <input class="form-check-input" type="checkbox" value="true" id="Status" name="Status" checked="@Model.SingleProduct.Status">
+                                            <label class="form-check-label" for="customckeck1">Status</label>
+                                        </div>
+                                        <input type="hidden" value="@Model.SingleProduct.Id" name="Id" id="Id" />
+
+                                        <button class="btn btn-success" type="submit">Edit Product</button>
+                                    </form>
+                                </div> <!-- end col -->
+
+                            </div>
+                            <!-- end row-->
+
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card -->
+                </div><!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#Description').summernote({ height: 300 });
+    });
+</script>
+
+

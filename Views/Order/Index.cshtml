@@ -1,0 +1,86 @@
+﻿@using Decathlon.AdminModel;
+@model OrderModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int i = 0;
+}
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="row">
+
+                                <div class="col-12 mb-3">
+                                    <h4 class="mt-0 header-title">Order List</h4>
+                                    <p class="text-muted font-14 mb-3 float-start">
+                                        Sitede yapılmış olan siparişlerin listesi
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Order Number</th>
+                                                <th>Order Date</th>
+                                                <th>User</th>
+                                                <th>Total Price</th>
+                                                <th>Order Status</th>
+                                                <th>Status</th>
+                                                <th>Setting</th>
+                                            </tr>
+                                        </thead>
+
+
+                                        <tbody>
+                                            @foreach (var order in Model.Orders)
+                                            {
+                                                i++;
+
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td>@order.OrderNo</td>
+                                                    <td>@order.Date</td>
+                                                    <td>@order.User.Email</td>
+                                                    <td>@order.Total.ToString("c")</td>
+                                                    <td>@order.OrderStatus</td>
+
+                                                    @{var status = order.Status == true ? "btn-success" : "btn-danger"; }
+                                                    <td><a class="btn  @status">@order.Status</a></td>
+
+                                                    <td>
+                                                        <a href="~/Order/Detail?id=@order.Id" class="btn btn-success"><i class="mdi mdi-account-star"></i></a>
+                                                        <a href="~/Order/Delete?id=@order.Id" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,87 @@
+﻿@using Decathlon.Models;
+@model Address
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">Edit My Address</h4>
+                            <p class="sub-header">
+                                Adres Düzenle
+                            </p>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <form method="post" action="~/UserAddresses/Edit">
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Title</label>
+                                            <input type="text" class="form-control" name="Title" id="Title" value="@Model.Title" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Country" class="form-label">Country</label>
+                                            <input type="text" id="Country" name="Country" class="form-control" value="@Model.Country" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="County" class="form-label">County</label>
+                                            <input type="text" id="County" name="County" class="form-control" value="@Model.County" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="District" class="form-label">District</label>
+                                            <input type="text" id="District" name="District" class="form-control" value="@Model.District" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Street" class="form-label">Street</label>
+                                            <input type="text" id="Street" name="Street" class="form-control" value="@Model.Street" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="PostCode" class="form-label">Post Code</label>
+                                            <input type="text" id="PostCode" name="PostCode" class="form-control" value="@Model.PostCode" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="BuildingNo" class="form-label">Building No</label>
+                                            <input type="number" id="BuildingNo" name="BuildingNo" class="form-control" value="@Model.BuildingNo" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="ApartmentNo" class="form-label">Apartment No</label>
+                                            <input type="number" id="ApartmentNo" name="ApartmentNo" class="form-control" value="@Model.ApartmentNo" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="OpenAddress" class="form-label">Open Address</label>
+                                            <textarea id="OpenAddress" name="OpenAddress" rows="3" class="form-control" required>@Model.OpenAddress</textarea>
+                                        </div>
+                                        <div class="form-check mb-2 form-check-success">
+                                            <input class="form-check-input" type="checkbox" checked="@Model.Status" value="true"  id="Status" name="Status">
+                                            <label class="form-check-label" for="customckeck1">Status</label>
+                                        </div>
+                                        <input type="hidden" value="@Model.Id" name="Id" id="Id" />
+                                        <button class="btn btn-success" type="submit">Add My Address</button>
+                                    </form>
+                                </div> <!-- end col -->
+                                <div class="col-md-6 text-center">
+                                    <h3>@Model.Title - Adres Düzenleme</h3>
+                                    <p>Bilgileri Eksiksiz Bir Şekilde Dodurunuz ve Boş Alan Bırakmayınız.</p>
+                                    <h2>@ViewBag.mesaj</h2>
+                                </div>
+                            </div>
+                            <!-- end row-->
+
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card -->
+                </div><!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+</div>
+
+

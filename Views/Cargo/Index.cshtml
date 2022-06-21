@@ -1,0 +1,88 @@
+﻿@using Decathlon.Models;
+@model List<Cargo>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int i = 0;
+}
+
+
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="row">
+
+                                <div class="col-12 mb-3">
+                                    <h4 class="mt-0 header-title">Cargo List</h4>
+                                    <p class="text-muted font-14 mb-3 float-start">
+                                        Sitede bulunan kargolar listesi
+                                    </p>
+                                    <a class="btn btn-success float-end" href="~/Cargo/Add"><i class="fa fa-plus"></i> Cargo Add</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Logo</th>
+                                                <th>Cargo Name</th>
+                                                <th>Status</th>
+                                                <th>Setting</th>
+                                            </tr>
+                                        </thead>
+
+
+                                        <tbody>
+                                            @foreach (var cargo in Model)
+                                            {
+                                                i++;
+
+                                            <tr>
+                                                <td>@i</td>
+                                                @{
+                                                    string image = string.IsNullOrEmpty(cargo.Logo) ? "default-cargo-logo.png" : cargo.Logo;
+                                                }
+                                                <td><img src="~/Content/images/cargo/@image" width="40" /></td>
+                                                <td>@cargo.Name</td>
+
+                                                @{var status = cargo.Status == true ? "btn-success" : "btn-danger"; }
+                                                <td><a class="btn  @status">@cargo.Status</a></td>
+
+                                                <td>
+                                                    <a href="~/Cargo/Edit?id=@cargo.Id" class="btn btn-success"><i class="mdi mdi-account-star"></i></a>
+                                                    <a href="~/Cargo/Delete?id=@cargo.Id" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                            }
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

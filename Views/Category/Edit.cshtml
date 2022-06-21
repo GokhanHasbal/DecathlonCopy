@@ -1,0 +1,104 @@
+﻿@using Decathlon.Models;
+@model Category
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    string resim = "";
+    if (string.IsNullOrEmpty(Model.Image))
+    {
+        resim = "default-category.png";
+    }
+    else
+    {
+        resim = Model.Image;
+    }
+}
+
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">@Model.Name - Category Edit</h4>
+                            <p class="sub-header">
+                                Kategori Düzenleme
+                            </p>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <form method="post" action="~/Category/Edit" enctype="multipart/form-data">
+                                        <div class="mb-3">
+                                            <img src="~/Content/images/category/@resim" class="w-100"/>
+                                            <input type="file" class="form-control mt-3" id="Image" name="Image" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Name" class="form-label">Name</label>
+                                            <input type="text" id="Name" name="Name" class="form-control" value="@Model.Name" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Description" class="form-label">Description</label>
+                                            <textarea id="Description" name="Description" class="form-control" required rows="3">@Model.Description</textarea>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Main Category</label>
+                                            <select class="form-control" name="MainCategoryId" id="MainCategoryId">
+                                                @if (Model.MainCategoryId != 0)
+                                                {
+                                                    <option value="@Model.MainCategoryId">@ViewBag.main</option>
+                                                }
+                                                <option value="0">Non Sub Category</option>
+                                                <optgroup>
+                                                    @foreach (var item in ViewBag.category)
+                                                    {
+                                                        <option value="@item.Id">@item.Name</option>
+                                                    }
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Campaign Select</label>
+                                            <select class="form-control" name="CompaignId" id="CompaignId">
+                                                @if (Model.CompaignId != 0)
+                                                {
+                                                    <option value="@Model.CompaignId">@ViewBag.compaignName</option>
+                                                }
+                                                <option value="0">Non Compaign</option>
+                                                <optgroup>
+                                                    @foreach (var item in ViewBag.campaign)
+                                                    {
+                                                        <option value="@item.Id">@item.Title</option>
+                                                    }
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                        <div class="form-check mb-2 form-check-success">
+                                            <input class="form-check-input" type="checkbox" value="true" id="Status" name="Status" checked="">
+                                            <label class="form-check-label" for="customckeck1">Status</label>
+                                        </div>
+                                        <input type="hidden" value="@Model.Id" name="Id" id="Id" />
+                                        <button class="btn btn-success" type="submit">Edit Category</button>
+                                    </form>
+                                </div> <!-- end col -->
+                                <div class="col-md-6 text-center">
+                                    <h3>Sisteme Yeni Kullanıcı Ekleme</h3>
+                                    <p>Bilgileri Eksiksiz Bir Şekilde Dodurunuz ve Boş Alan Bırakmayınız.</p>
+                                    <h2>@ViewBag.mesaj</h2>
+                                </div>
+                            </div>
+                            <!-- end row-->
+
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card -->
+                </div><!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+</div>

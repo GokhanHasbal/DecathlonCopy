@@ -1,0 +1,90 @@
+﻿@using Decathlon.AdminModel;
+@model ProductModel
+
+@{
+ 
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title"><a href="~/Product/ProductComment?id=@Model.SingleProduct.Id">@Model.SingleProduct.Name</a> - @Model.SingleUser.Name</h4>
+                            
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="mb-3">
+                                        <table class="table">
+                                            <tr>
+                                                <th>Image</th>
+                                                <td><img src="@Model.SingleComment.Image" width="50%" /></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Date</th>
+                                                <td>@Model.SingleComment.Date</td>
+                                            </tr>
+                                            <tr>
+                                                <th>User Name</th>
+                                                <td>@Model.SingleUser.Name @Model.SingleUser.Surname</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Product</th>
+                                                <td>@Model.SingleProduct.Name</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Rate</th>
+                                                <td>
+                                                    @for (int i = 0; i < Model.SingleComment.Rate; i++)
+                                                    {
+                                                        <i class="fa fa-star text-warning"></i>
+                                                    }
+                                                    @for (int i = 0; i < 5 - Convert.ToInt32(Model.SingleComment.Rate); i++)
+                                                    {
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                    }
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Comment</th>
+                                                <td><textarea class="form-control" disabled>@Html.Raw(Model.SingleComment.Comment)</textarea></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <form method="post" action="~/Product/CommentDetail">
+                                        <div class="form-check mb-2 form-check-success">
+                                            <input class="form-check-input" type="checkbox" value="true" id="Status" name="Status" checked="@Model.SingleComment.Status">
+                                            <label class="form-check-label" for="customckeck1">Publish Comment</label>
+                                        </div>
+                                        <input type="hidden" name="Id" id="Id" value="@Model.SingleComment.Id" />
+                                        <button class="btn btn-success" type="submit"><i class="fa fa-paper-plane"></i> Publish Comment</button>
+                                        <a href="~/Product/CommentDelete?id=@Model.SingleComment.Id" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
+
+                                    </form>
+                                </div> <!-- end col -->
+                                
+                            </div>
+                            <!-- end row-->
+
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card -->
+                </div><!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+</div>
+
+
+
+
+

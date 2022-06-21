@@ -1,0 +1,117 @@
+﻿@using Decathlon.Models;
+@model User
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var image = string.IsNullOrEmpty(Model.Image) ? "default-user.jpg" : Model.Image;
+
+}
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">New Add User</h4>
+                            <p class="sub-header">
+                                Yeni kullanıcı ekleme
+                            </p>
+                            <form method="post" action="~/User/Edit" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-lg-6">
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" class="form-control" name="Email" id="Email" value="@Model.Email" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Name" class="form-label">Name</label>
+                                            <input type="text" id="Name" name="Name" class="form-control" value="@Model.Name" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Surname" class="form-label">Surname</label>
+                                            <input type="text" id="Surname" name="Surname" class="form-control" value="@Model.Surname" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="TcNo" class="form-label">Tc No</label>
+                                            <input type="text" id="TcNo" name="TcNo" class="form-control" value="@Model.TcNo" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="Phone" class="form-label">Phone</label>
+                                            <input type="text" id="Phone" name="Phone" class="form-control" value="@Model.Phone" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Permisson</label>
+                                            <select class="form-control" name="PermissionId" id="PermissionId">
+                                                <option value="@Model.PermissionId">@Model.Permission.Name</option>
+                                                <optgroup>
+                                                    @foreach (var item in ViewBag.permission)
+                                                    {
+                                                        <option value="@item.Id">@item.Name</option>
+                                                    }
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Grade</label>
+                                            <select class="form-control" name="GradeId" id="GradeId">
+                                                <option value="@Model.GradeId">@Model.Grade.Name</option>
+                                                <optgroup>
+                                                    @foreach (var item in ViewBag.grade)
+                                                    {
+                                                        <option value="@item.Id">@item.Name</option>
+                                                    }
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="GradeScore" class="form-label">Grade Score</label>
+                                            <input type="number" min="0" max="5000" id="GradeScore" name="GradeScore" class="form-control" value="@Model.GradeScore" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Password" class="form-label">Password</label>
+                                            <input type="password" min="0" max="5000" id="Password" name="Password" class="form-control" value="@Model.Password" required>
+                                        </div>
+                                        <div class="form-check mb-2 form-check-success">
+                                            <input class="form-check-input" type="checkbox" value="@Model.Status" id="Status" name="Status" checked="">
+                                            <label class="form-check-label" for="customckeck1">Status</label>
+                                        </div>
+
+                                        <button class="btn btn-success" type="submit">Edit User</button>
+
+                                    </div> <!-- end col -->
+                                    <div class="col-md-6 text-center">
+                                        <h3>User Profile Image</h3>
+                                        <img src="~/Content/images/users/@image" width="50%" />
+                                        <br />
+
+                                        <div class="mb-3 mt-3 p-4">
+                                            <div class="input-group">
+                                                <input type="file" class="form-control" name="Image" id="Image" />
+                                            </div>
+                                        </div>
+                                        <input type="hidden" value="@Model.Id" name="Id" id="Id" />
+                                        <h2>@ViewBag.mesaj</h2>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- end row-->
+
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card -->
+                </div><!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+</div>
+
+

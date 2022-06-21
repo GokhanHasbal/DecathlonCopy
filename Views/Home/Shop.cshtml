@@ -1,0 +1,78 @@
+﻿@using Decathlon.Models;
+@model List<Product>
+@{
+    DataContext db = new DataContext();
+    var productImages = db.ProductImage.ToList();
+}
+
+<section id="page-title">
+    <div class="container clearfix">
+        <h1>Shop</h1>
+        <span>Start Buying your Favourite Theme</span>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="~/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Shop</li>
+        </ol>
+    </div>
+</section>
+
+<section id="content">
+    <div class="content-wrap">
+        <div class="container clearfix">
+
+            <div id="shop" class="shop row grid-container gutter-30" data-layout="fitRows">
+
+
+                @foreach (var product in Model)
+                {
+                    string productImage = string.IsNullOrEmpty(product.Image) ? "default-product.png" : product.Image;
+
+                    var secondaryImage = productImages.FirstOrDefault(x => x.ProductId == product.Id && x.Delete == false);
+                    <div class="product col-lg-3 col-md-4 col-sm-6 col-12">
+
+                        <div class="grid-inner">
+                            <div class="product-image">
+                                <a href="#"><img src="~/Content/images/product/@productImage" alt="Checked Short Dress"></a>
+                                @if (secondaryImage != null)
+                                {
+                                    <a href="#"><img src="~/Content/images/product/@secondaryImage.Image" alt="Checked Short Dress"></a>
+                                }
+
+                                <div class="sale-flash badge bg-success p-2">@product.Discount % Off*</div>
+                                <div class="bg-overlay">
+                                    <div class="bg-overlay-content align-items-end justify-content-between" data-hover-animate="fadeIn" data-hover-speed="400">
+                                        <form method="post" action="~/Cart/AddToCart">
+                                            <input type="hidden" id="id" name="id" value="@product.Id" />
+                                            <input type="hidden" id="quantity" name="quantity" value="1" />
+                                            <button type="submit" class="btn btn-dark me-2"><i class="icon-shopping-basket"></i></button>
+                                            <a href="~/Content/canvas/include/ajax/shop-item.html" class="btn btn-dark" data-lightbox="ajax"><i class="icon-line-expand"></i></a>
+
+                                        </form>
+
+                                    </div>
+                                    <div class="bg-overlay-bg bg-transparent"></div>
+                                </div>
+                            </div>
+                            <div class="product-desc">
+                                <div class="product-title"><h3><a href="~/Home/ProductDetail/@product.Id">@product.Name</a></h3></div>
+                                <div class="product-price"><del>@product.Price.ToString("c")</del> <ins>@((product.Price-((product.Price/100)*product.Discount)).ToString("c"))</ins></div>
+                                <div class="product-rating">
+                                    @for (int i = 0; i < product.Rate; i++)
+                                    {
+                                        <i class="icon-star3 text-warning"></i>
+                                    }
+                                    @for (int i = 0; i < 5 - product.Rate; i++)
+                                    {
+                                        <i class="icon-star3 text-secondary"></i>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+

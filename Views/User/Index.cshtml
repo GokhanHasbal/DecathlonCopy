@@ -1,0 +1,81 @@
+﻿@using Decathlon.AdminModel;
+@model UserModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int i = 0;
+}
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="row">
+
+                                <div class="col-12 mb-3">
+                                    <h4 class="mt-0 header-title">User List</h4>
+                                    <p class="text-muted font-14 mb-3 float-start">
+                                        Sitede bulunan kullanıcıların listesi
+                                    </p>
+                                    <a class="btn btn-success float-end" href="~/User/Add"><i class="fa fa-plus"></i> User Add</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Email</th>
+                                                <th>Name</th>
+                                                <th>Surname</th>
+                                                <th>Permisson</th>
+                                                <th>Grade</th>
+                                                <th>Setting</th>
+                                            </tr>
+                                        </thead>
+
+
+                                        <tbody>
+                                            @foreach (var user in Model.User)
+                                            {
+                                                i++;
+
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td>@user.Email</td>
+                                                    <td>@user.Name</td>
+                                                    <td>@user.Surname</td>
+                                                    <td>@user.Permission.Name</td>
+                                                    <td>@user.Grade.Name</td>
+                                                    <td>
+                                                        <a href="~/User/Edit?id=@user.Id" class="btn btn-success"><i class="fa fa-user-cog"></i></a>
+                                                        <a href="~/User/Delete?id=@user.Id" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
